@@ -1,0 +1,191 @@
+<%- include('../partials/head') %>
+</head>
+<body class="bg-gradient-to-br from-pink-50 via-purple-50 to-pink-100 min-h-screen">
+    <%- include('../partials/navbar') %>
+    
+    <!-- Signup Form Container -->
+    <div class="flex items-center justify-center min-h-[calc(100vh-80px)] px-4 py-8">
+        <div class="w-full max-w-lg">
+            <!-- Signup Card -->
+            <div class="bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl border border-pink-100 p-8">
+                <!-- Header -->
+                <div class="text-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800 mb-2">Join Airbnb</h1>
+                    <p class="text-gray-600">Create your account to get started</p>
+                </div>
+
+                <!-- Error Messages -->
+                <% if (locals.errorMsgs && errorMsgs.length > 0) { %>
+                    <div class="bg-red-50 border-l-4 border-red-400 p-4 mb-6 rounded-lg">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">Please fix the following errors:</h3>
+                                <div class="mt-2 text-sm text-red-700">
+                                    <ul class="list-disc pl-5 space-y-1">
+                                        <% errorMsgs.forEach(error => { %>
+                                            <li><%= typeof error === 'string' ? error : error.msg %></li>
+                                        <% }); %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+                <!-- Signup Form -->
+                <form action="/signup" method="POST" class="space-y-5">
+                    <!-- Name Fields Row -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- First Name -->
+                        <div>
+                            <label for="firstName" class="block text-sm font-medium text-gray-700 mb-2">
+                                First Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="firstName" 
+                                name="firstName" 
+                                required
+                                value="<%= locals.prevDetails && prevDetails.firstName ? prevDetails.firstName : '' %>"
+                                class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'firstName')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                                placeholder="John"
+                            >
+                        </div>
+
+                        <!-- Last Name -->
+                        <div>
+                            <label for="lastName" class="block text-sm font-medium text-gray-700 mb-2">
+                                Last Name
+                            </label>
+                            <input 
+                                type="text" 
+                                id="lastName" 
+                                name="lastName" 
+                                required
+                                value="<%= locals.prevDetails && prevDetails.lastName ? prevDetails.lastName : '' %>"
+                                class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'lastName')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                                placeholder="Doe"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+                            Email Address
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            value="<%= locals.prevDetails && prevDetails.email ? prevDetails.email : '' %>"
+                            class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'email')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                            placeholder="john.doe@example.com"
+                        >
+                    </div>
+
+                    <!-- Password Fields Row -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <!-- Password -->
+                        <div>
+                            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+                                Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                required
+                                minlength="8"
+                                class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'password')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                                placeholder="••••••••"
+                            >
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div>
+                            <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-2">
+                                Confirm Password
+                            </label>
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                required
+                                minlength="8"
+                                class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'confirmPassword')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                                placeholder="••••••••"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- User Type Dropdown -->
+                    <div>
+                        <label for="userType" class="block text-sm font-medium text-gray-700 mb-2">
+                            Account Type
+                        </label>
+                        <select 
+                            id="userType" 
+                            name="userType" 
+                            required
+                            class="w-full px-4 py-3 border <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'userType')) ? 'border-red-500 bg-red-50' : 'border-gray-300' %> rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all duration-200 bg-white/70 backdrop-blur-sm"
+                        >
+                            <option value="" <%= (!locals.prevDetails || !prevDetails.userType) ? 'selected' : '' %>>Select your account type</option>
+                            <option value="customer" <%= (locals.prevDetails && prevDetails.userType === 'customer') ? 'selected' : '' %>>🏠 Customer - I want to book places</option>
+                            <option value="host" <%= (locals.prevDetails && prevDetails.userType === 'host') ? 'selected' : '' %>>🏡 Host - I want to list my property</option>
+                        </select>
+                    </div>
+
+                    <!-- Terms and Conditions Checkbox -->
+                    <div class="flex items-start space-x-3 <%= (locals.errorMsgs && errorMsgs.some(err => err.path === 'terms')) ? 'border border-red-300 rounded p-2 bg-red-50' : '' %>">
+                        <input 
+                            type="checkbox" 
+                            id="terms" 
+                            name="terms" 
+                            required
+                            <%= (locals.prevDetails && prevDetails.terms) ? 'checked' : '' %>
+                            class="mt-1 w-4 h-4 text-pink-600 bg-gray-100 border-gray-300 rounded focus:ring-pink-500 focus:ring-2"
+                        >
+                        <label for="terms" class="text-sm text-gray-700 leading-relaxed">
+                            I agree to the 
+                            <a href="/terms-and-conditions" target="_blank" class="text-pink-600 hover:text-pink-700 underline font-medium">
+                                Terms and Conditions
+                            </a>
+                            and 
+                            <a href="/privacy-policy" target="_blank" class="text-pink-600 hover:text-pink-700 underline font-medium">
+                                Privacy Policy
+                            </a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button 
+                        type="submit"
+                        value="sign me up"
+                        class="w-full bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-700 hover:to-purple-700 text-white font-semibold py-3 px-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                    >
+                        Create Account
+                    </button>
+
+                    <!-- Login Link -->
+                    <div class="text-center mt-6">
+                        <p class="text-gray-600">
+                            Already have an account? 
+                            <a href="/login" class="text-pink-600 hover:text-pink-700 font-medium underline">
+                                Sign in here
+                            </a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
