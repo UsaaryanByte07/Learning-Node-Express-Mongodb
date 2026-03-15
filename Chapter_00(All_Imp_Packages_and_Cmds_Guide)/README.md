@@ -42,6 +42,7 @@ npm install connect-flash nodemailer
 | `mysql2` | 🗄️ Database | MySQL driver for Node.js |
 | `mongodb` | 🗄️ Database | Official MongoDB Node.js driver |
 | `mongoose` | 🗄️ Database | ODM for MongoDB — schemas, models, hooks, validation |
+| `multer` | 📁 Uploads | Handles multipart/form-data for file uploads (images, docs, etc.) |
 | `express-session` | 🔐 Auth | Adds server-side session support |
 | `connect-mongodb-session` | 🔐 Auth | Stores sessions in MongoDB *(older approach)* |
 | `connect-mongo` | 🔐 Auth | Recommended MongoDB session store |
