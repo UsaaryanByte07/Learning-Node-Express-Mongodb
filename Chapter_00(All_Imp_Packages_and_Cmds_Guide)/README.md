@@ -47,12 +47,15 @@ npm install connect-flash nodemailer
 | `connect-mongodb-session` | 🔐 Auth | Stores sessions in MongoDB *(older approach)* |
 | `connect-mongo` | 🔐 Auth | Recommended MongoDB session store |
 | `express-validator` | 🛡️ Security | Validates & sanitizes incoming request data |
-| `bcrypt` | 🛡️ Security | Securely hashes & verifies passwords |
+| `bcryptjs` | 🛡️ Security | Securely hashes & verifies passwords |
 | `resend` | 📧 Email | SDK for sending transactional emails |
 | `nodemailer` | 📧 Email | Sends emails via SMTP/transport providers |
 | `connect-flash` | 💬 UX | One-time flash messages in session (success/error after redirects) |
 | `dotenv` | ⚙️ Config | Loads environment variables from a `.env` file into `process.env` |
 | `crypto` | 🔒 Built-in | Node.js module for tokens, random bytes & hashing |
+| `cors` | 🛡️ Security | Middleware to enable Cross-Origin Resource Sharing (CORS) |
+| `jsonwebtoken` | 🔐 Auth | Creates and verifies JSON Web Tokens (JWT) for authentication |
+| `cookie-parser` | 🌐 Core | Parses cookie header and populates req.cookies |
 
 ---
 
